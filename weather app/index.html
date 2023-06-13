@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="styles.css">
+    <title>Weather</title>
+</head>
+<body>
+    <div class="card">
+        <div class="tab">
+            <button id="erdek" class="active">Erdek</button>
+            <button id="karachi">Karachi</button>
+        </div>
+
+        <div class="weather">
+            <img src="images/clear.png" class="weather_icon" id="icon">
+            <h1 id="temp"><a id="convert_temp">37°C</a></h1>
+            <p id="description">Mostly sunny</p>
+            <div class="temp_details">
+                <div class="feel">
+                    <p><b>Feels like</b></p>
+                    <div id="feels_like">39°C</div>
+                </div>
+                <div class="min">
+                    <p><b>Minimum</b></p>
+                    <p id="min_temp">30°C</p>
+                </div>
+                <div class="max">
+                    <p><b>Maximum</b></p>
+                    <p id="max_temp">37°C</p>
+                </div>
+            </div>
+            <h2 id="city">Karachi</h2>
+
+            <div class="details">
+                <div class="col1">
+                    <img src="images/humidity.png">
+                    <div class="info">
+                        <p class="humidity" id="humidity">52%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col2">
+                    <img src="images/wind.png">
+                    <div class="info">
+                        <p class="wind" id="wind">20km/h</p>
+                        <p>Wind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="weatherApp.js"></script>
+</body>
+</html>
