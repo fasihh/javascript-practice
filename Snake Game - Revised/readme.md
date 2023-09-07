@@ -1,1 +1,1 @@
-# Learned how to use animation frames from a YT tutorial. Followed tutorial for this one.
+# Learned how to use animation frames from a YT tutorial. Basically, followed tutorial for this one.
