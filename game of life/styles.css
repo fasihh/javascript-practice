@@ -69,8 +69,16 @@ h1 {
 
 #speed-container {
 	display: flex;
-	width: 130px;
+	padding: 10px;
+	width: 120px;
 	justify-content: space-between;
+	border: 1px solid #F5EDED;
+	border-radius: 2px;
+}
+
+#speed-container legend {
+	color: #F5EDED;
+	font-size: 15px;
 }
 
 #speed-buttons {
@@ -90,13 +98,9 @@ h1 {
 }
 
 #display {
-	margin-top: 15px;
 	display: flex;
 	justify-content: space-between;
-	width: 80px;
+	width: 50px;
 	color: white;
-}
-
-#display {
-	font-size: 20px;
+	font-size: 40px;
 }
