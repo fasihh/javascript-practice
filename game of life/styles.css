@@ -1,0 +1,94 @@
+* {
+	box-sizing: 0;
+	padding: 0;
+	margin: 0;
+	background: #100F0F;
+	font-family: monospace;
+}
+
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-flow: column;
+}
+
+h1 {
+	text-shadow: 3px 3px #3E3636;
+	color: #F5EDED;
+	letter-spacing: 10px;
+	font-size: 60px;
+	margin-top: 20px;
+}
+
+.cell {
+	width: 20px;
+	height: 20px;
+}
+
+.ded {
+	background-color: #3E3636;
+	border: 1px solid #adadad;
+}
+
+.alv {
+	background-color: #D72323;
+	border: 1px solid #F5EDED;
+}
+
+#grid {
+	margin-top: 30px;
+	display: grid;
+	border: 2px solid #F5EDED;
+	border-radius: 3px;
+}
+
+#pause {
+	font-size: 30px;
+	height: 50px;
+	width: 300px;
+	border-radius: 2px;
+	border: 2px solid #adadad;
+	background-color: #F5EDED;
+	cursor: pointer;
+	transition: 0.2s;
+}
+
+#controls {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 100px;
+}
+
+#speed-container {
+	display: flex;
+	width: 130px;
+	justify-content: space-between;
+}
+
+#speed-buttons {
+	height: 60px;
+	display: flex;
+	justify-content: space-between;
+	flex-flow: column;
+}
+
+#speed-buttons button {
+	height: 22px;
+	border: 0.3vmin solid #adadad;
+	background-color: #F5EDED;
+	border-radius: 10px;
+}
+
+#display {
+	margin-top: 15px;
+	display: flex;
+	justify-content: space-between;
+	width: 80px;
+	color: white;
+}
+
+#display {
+	font-size: 20px;
+}
