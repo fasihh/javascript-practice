@@ -1,4 +1,4 @@
-var max_rows = 32, max_cols = 32;
+var max_rows = 32, max_cols = 48;
 var frame_delay = 4;
 
 let population = [];
@@ -104,8 +104,6 @@ function initialize_grid()
 		grid.push(grid_row);
 	}
 
-	grid[12][17] = true;
-
 	return grid;
 }
 
@@ -132,4 +130,25 @@ function update_population() {
 var is_paused = () => { return (pause.classList[0] == ".on") ? true : false }
 
 let grid = initialize_grid();
+
+const gun = [
+	[5, 1], [5, 2], [6, 1], [6, 2],   // initial block
+	[5, 11], [6, 11], [7, 11],        // first glider
+	[4, 12], [8, 12],                  // second glider
+	[3, 13], [9, 13],                  // third glider
+	[3, 14], [9, 14],                  // fourth glider
+	[6, 15],                           // fifth glider
+	[4, 16], [8, 16],                  // sixth glider
+	[5, 17], [6, 17], [7, 17],        // seventh glider
+	[6, 18],                           // eighth glider
+	[3, 21], [4, 21], [5, 21],        // ninth glider
+	[3, 22], [4, 22], [5, 22],        // tenth glider
+	[2, 23], [6, 23],                  // eleventh glider
+	[1, 25], [2, 25], [6, 25], [7, 25], // twelfth glider
+	[3, 35], [4, 35],                  // final block
+	[3, 36], [4, 36]                   // final block
+];
+
+for (const [row, col] of gun) grid[row][col] = true;
+
 main(0);
