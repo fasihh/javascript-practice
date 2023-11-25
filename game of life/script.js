@@ -1,7 +1,7 @@
 var max_rows = 32, max_cols = 48;
-var frame_delay = 4;
+var frame_delay = 6;
 
-let population = [];
+let population = 0;
 let last_render_time = 0;
 let grid_display = document.getElementById("grid");
 let pause = document.getElementById("pause");
@@ -9,14 +9,20 @@ let dead_cells = document.getElementsByClassName("ded");
 let alive_cells = document.getElementsByClassName("alv");
 let inc = document.getElementById("inc");
 let dec = document.getElementById("dec");
+let clr = document.getElementById("clr");
+let dragging = false;
 
 grid_display.style.setProperty('grid-template-columns', 'repeat(' + max_cols + ', 1fr)');
 grid_display.style.setProperty('grid-template-rows', 'repeat(' + max_rows + ', 1fr)');
 
 pause.addEventListener("click", () => {
 	pause.classList.toggle(".on");
-	if (pause.textContent == "Play") pause.textContent = "Pause"
-	else pause.textContent = "Play"
+	if (pause.textContent == "PLAY") pause.textContent = "PAUSE"
+	else pause.textContent = "PLAY"
+})
+
+clr.addEventListener("click", () => {
+	grid = initialize_grid()
 })
 
 inc.addEventListener("click", () => {
@@ -32,37 +38,37 @@ dec.addEventListener("click", () => {
 
 function main(current_time)
 {
-	let frame = window.requestAnimationFrame(main);
+	window.requestAnimationFrame(main);
 
 	for (let alive of alive_cells) {
 		alive.addEventListener("click", (event) => {
-			let node = event.target
-			let co_ords = node.id.split("-")
-			console.log(co_ords);
+			let node = event.target;
+			let co_ords = node.id.split("-");
 			grid[co_ords[0]][co_ords[1]] = false;
 
-			node.classList.remove("alv")
-			node.classList.add("ded")
+			node.classList.remove("alv");
+			node.classList.add("ded");
 		})
 	}
 
 	for (let dead of dead_cells) {
 		dead.addEventListener("click", (event) => {
-			let node = event.target
-			let co_ords = node.id.split("-")
+			dragging = true;
+			let node = event.target;
+			let co_ords = node.id.split("-");
 			grid[co_ords[0]][co_ords[1]] = true;
 
-			node.classList.remove("ded")
-			node.classList.add("alv")
+			node.classList.add("alv");
+			node.classList.remove("ded");
 		})
 	}
 
 	const last_render_seconds = (current_time - last_render_time) / 1000;
     if (last_render_seconds < 1 / frame_delay || is_paused()) return;
-
     last_render_time = current_time;
 
-	update_population();
+	document.getElementById("population").textContent = population
+	population = 0
     grid = evolve(grid);
     draw_grid(grid);
 }
@@ -73,8 +79,7 @@ function evolve(cur_gen)
 
   	let positions = [0,1, 0,-1, 1,0, -1,0, 1,1, -1,-1, -1,1, 1,-1];
   	for (let i = 0; i < max_rows; i++) {
-	    for (let j = 0, count; j < max_cols; j++) {
-			count = 0;
+	    for (let j = 0, count = 0; j < max_cols; j++, count = 0) {
 			next_gen[i][j] = false;
 
 			for (let k = 0, x, y; k < 16;) {
@@ -82,10 +87,7 @@ function evolve(cur_gen)
 				count += y >= 0 && x >= 0 && x < max_cols && y < max_rows && cur_gen[y][x];
 			}
 
-			if (count == 3 || (count == 2 && cur_gen[i][j])) {
-				next_gen[i][j] = true;
-				population.push(1);
-			}
+			if (count == 3 || (count == 2 && cur_gen[i][j])) next_gen[i][j] = true, population++;
 	    }
   	}
 
@@ -119,15 +121,23 @@ function draw_grid(grid)
 	grid_display.innerHTML = html;
 }
 
-function update_population() {
-	var sum = population.reduce((total, val) => {
-		return total + val;
-	}, 0)
-	document.getElementById("population").textContent = sum
-	population = []
+function draw_cell(event) {
+	let node = event.target
+	let co_ords = node.id.split("-");
+	let r = parseInt(co_ords[0]), c = parseInt(co_ords[1]);
+
+	if (grid[r][c]) {
+		grid[r][c] = false;
+		node.classList.remove("alv");
+		node.classList.add("ded");
+	} else {
+		grid[r][c] = true;
+		node.classList.remove("ded");
+		node.classList.add("alv");
+	}
 }
 
-var is_paused = () => { return (pause.classList[0] == ".on") ? true : false }
+var is_paused = () => { return (pause.classList[1] == ".on") ? true : false }
 
 let grid = initialize_grid();
 
