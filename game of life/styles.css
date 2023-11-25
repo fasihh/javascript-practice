@@ -3,6 +3,7 @@
 	padding: 0;
 	margin: 0;
 	background: #100F0F;
+	color: #F5EDED;
 	font-family: monospace;
 }
 
@@ -10,10 +11,39 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	flex-flow: column;
+	flex-flow: row;
 }
 
-h1 {
+#info {
+	font-size: 16px;
+	width: 430px;
+}
+
+#legend {
+	display: flex;
+	flex-flow: row;
+}
+
+#legend div {
+	display: flex;
+	margin-right: 10px;
+}
+
+#legend .alv, .ded {
+	width: 20px;
+	height: 20px;
+}
+
+#legend span {
+	display: flex;
+	margin-right: 20px;
+}
+
+#main-content {
+	margin-right: 150px;
+}
+
+#main-content h1 {
 	text-shadow: 3px 3px #3E3636;
 	color: #F5EDED;
 	letter-spacing: 10px;
@@ -23,7 +53,7 @@ h1 {
 
 #population-wrapper {
 	color: white;
-	margin: 15px 470px 0 0;
+	margin: 40px 470px 0 0;
 	font-size: 20px;
 }
 
@@ -42,8 +72,12 @@ h1 {
 	border: 1px solid #F5EDED;
 }
 
-#grid {
+#grid-wrapper {
 	margin-top: 10px;
+	display: flex;
+}
+
+#grid {
 	display: grid;
 	border: 2px solid #F5EDED;
 	border-radius: 3px;
@@ -52,24 +86,34 @@ h1 {
 .control-button {
 	font-size: 30px;
 	height: 50px;
-	width: 250px;
-	border-radius: 2px;
+	width: 100px;
+	margin: 30px 0 0 20px;
+	border-radius: 5px;
 	border: 2px solid #adadad;
 	background-color: #F5EDED;
 	cursor: pointer;
+	color: black;
+}
+
+.control-button:hover {
+	transition: 0.2s;
+	background-color: #cbc7c7;
 }
 
 #controls {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	margin-top: 500px;
+	flex-flow: column;
 	height: 100px;
 }
 
 #speed-container {
 	display: flex;
 	padding: 10px;
-	width: 120px;
+	width: 100px;
+	margin: 30px 0 0 50px;
 	justify-content: space-between;
 	border: 1px solid #F5EDED;
 	border-radius: 2px;
@@ -88,18 +132,20 @@ h1 {
 }
 
 #speed-buttons button {
+	line-height: 0px;
 	height: 22px;
 	width: 22px;
 	font-size: 20px;
 	border: 0.3vmin solid #adadad;
 	background-color: #F5EDED;
 	border-radius: 10px;
+	color: black;
 }
 
 #display {
 	display: flex;
 	justify-content: space-between;
-	width: 50px;
+	margin-right: 24px;
 	color: white;
 	font-size: 40px;
 }
