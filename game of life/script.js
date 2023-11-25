@@ -10,7 +10,6 @@ let alive_cells = document.getElementsByClassName("alv");
 let inc = document.getElementById("inc");
 let dec = document.getElementById("dec");
 let clr = document.getElementById("clr");
-let dragging = false;
 
 grid_display.style.setProperty('grid-template-columns', 'repeat(' + max_cols + ', 1fr)');
 grid_display.style.setProperty('grid-template-rows', 'repeat(' + max_rows + ', 1fr)');
@@ -22,7 +21,10 @@ pause.addEventListener("click", () => {
 })
 
 clr.addEventListener("click", () => {
-	grid = initialize_grid()
+	grid = initialize_grid();
+	draw_grid(grid);
+	population = 0;
+	update_population();
 })
 
 inc.addEventListener("click", () => {
@@ -48,29 +50,30 @@ function main(current_time)
 
 			node.classList.remove("alv");
 			node.classList.add("ded");
-		})
+		});
 	}
 
 	for (let dead of dead_cells) {
 		dead.addEventListener("click", (event) => {
-			dragging = true;
 			let node = event.target;
 			let co_ords = node.id.split("-");
 			grid[co_ords[0]][co_ords[1]] = true;
 
 			node.classList.add("alv");
 			node.classList.remove("ded");
-		})
+		});
 	}
 
-	const last_render_seconds = (current_time - last_render_time) / 1000;
-    if (last_render_seconds < 1 / frame_delay || is_paused()) return;
+	const delta_seconds = (current_time - last_render_time) / 1000;
+    if (delta_seconds < 1 / frame_delay) return;
     last_render_time = current_time;
 
-	document.getElementById("population").textContent = population
-	population = 0
-    grid = evolve(grid);
-    draw_grid(grid);
+	update_population();
+	if (is_paused()) return;
+
+	population = 0;
+	grid = evolve(grid);
+	draw_grid(grid);
 }
 
 function evolve(cur_gen) 
@@ -139,24 +142,26 @@ function draw_cell(event) {
 
 var is_paused = () => { return (pause.classList[1] == ".on") ? true : false }
 
+var update_population = () => { document.getElementById("population").textContent = population }
+
 let grid = initialize_grid();
 
 const gun = [
-	[5, 1], [5, 2], [6, 1], [6, 2],   // initial block
-	[5, 11], [6, 11], [7, 11],        // first glider
-	[4, 12], [8, 12],                  // second glider
-	[3, 13], [9, 13],                  // third glider
-	[3, 14], [9, 14],                  // fourth glider
-	[6, 15],                           // fifth glider
-	[4, 16], [8, 16],                  // sixth glider
-	[5, 17], [6, 17], [7, 17],        // seventh glider
-	[6, 18],                           // eighth glider
-	[3, 21], [4, 21], [5, 21],        // ninth glider
-	[3, 22], [4, 22], [5, 22],        // tenth glider
-	[2, 23], [6, 23],                  // eleventh glider
-	[1, 25], [2, 25], [6, 25], [7, 25], // twelfth glider
-	[3, 35], [4, 35],                  // final block
-	[3, 36], [4, 36]                   // final block
+	[5, 1], [5, 2], [6, 1], [6, 2],   
+	[5, 11], [6, 11], [7, 11],        
+	[4, 12], [8, 12],                  
+	[3, 13], [9, 13],                  
+	[3, 14], [9, 14],                  
+	[6, 15],                           
+	[4, 16], [8, 16],                  
+	[5, 17], [6, 17], [7, 17],        
+	[6, 18],                           
+	[3, 21], [4, 21], [5, 21],        
+	[3, 22], [4, 22], [5, 22],        
+	[2, 23], [6, 23],                  
+	[1, 25], [2, 25], [6, 25], [7, 25], 
+	[3, 35], [4, 35],                  
+	[3, 36], [4, 36]                   
 ];
 
 for (const [row, col] of gun) grid[row][col] = true;
