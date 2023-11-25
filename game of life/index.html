@@ -7,36 +7,55 @@
 	</head>
 
 	<body>
-		<h1>Conway's Game of Life</h1>
+		<div id="info">
+			<h2>How the game works:</h2>
+			<pre>
+1 - Any live cell with fewer than two live<br>    neighbours dies, as if by underpopulation.
+2 - Any live cell with two or three live<br>    neighbours lives on to the next generation.
+3 - Any live cell with more than three live<br>    neighbours dies, as if by overpopulation.
+4 - Any dead cell with exactly three live<br>    neighbours becomes a live cell, as if by<br>    reproduction
+<br><b>Edit the cells in the grid by clicking <br>            when paused.</b>
+			</pre>
 
-		<div id="population-wrapper">
-			<label>Current population:</label>
-			<span id="population">0</span>
+			<div id="legend">
+				<div><span><b>Live cell:</b></span><div class="alv"></div></div>
+				<div><span><b>Dead cell:</b></span><div class="ded"></div></div>
+			</div>
+			
 		</div>
 
-		<div id="grid-wrapper">
-			<div id="grid">
-				<div id="grid-box"></div>
+		<div id="main-content">
+			<h1>Conway's Game of Life</h1>
+			<div id="population-wrapper">
+				<label>Current population:</label>
+				<span id="population">0</span>
 			</div>
-
-			<div id="controls">
-				<button id="pause" class="control-button">PAUSE</button>
-
-				<button id="clr" class="control-button">CLEAR</button>
-
-				<fieldset id="speed-container">
-					<legend>Speed</legend>
-					<div id="speed-buttons">
-						<button id="inc">+</button>
-						<button id="dec">-</button>
-					</div>
-
-					<div id="display">
-						<span id="display-speed">6</span>
-					</div>
-				</fieldset>
+	
+			<div id="grid-wrapper">
+				<div id="grid">
+					<div id="grid-box"></div>
+				</div>
+	
+				<div id="controls">
+					<button id="pause" class="control-button">PAUSE</button>
+	
+					<button id="clr" class="control-button">CLEAR</button>
+	
+					<fieldset id="speed-container">
+						<legend>Speed</legend>
+						<div id="speed-buttons">
+							<button id="inc">+</button>
+							<button id="dec">-</button>
+						</div>
+	
+						<div id="display">
+							<span id="display-speed">6</span>
+						</div>
+					</fieldset>
+				</div>
 			</div>
 		</div>
+		
 		
 		<script src="script.js"></script>
 	</body>
